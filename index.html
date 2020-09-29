@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="index.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <script type= "text/javascript" src="index.js"></script>
+    <button class="openButton">NEW BOOK</button>
+    
+    <form action= "" class="form">
+
+        <div class="header">
+            <div class="title">BOOK INFO</div>
+            <div class="closeButton">&times;</div>
+        </div>
+
+        <section class="section">
+            <input class="input" type="text" placeholder="Title" required>
+            <input class="input" type="text" placeholder="Author" required>
+            <input class="input" type="text" placeholder="Number of pages" required>
+            <input class="input" type="text" placeholder="Read status" required>
+            <button class="submit">SUBMIT</button>
+        </section>
+    </form>
+
+    <div id="overlay"></div>
+
+    <div class="display"></div>
+
+    <script type= "text/javascript" src="script.js"></script>
 </body>
 </html>
