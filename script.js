@@ -1,10 +1,10 @@
 let library = [];
 
 function Book(title, author, pages, read) {
-    this.title = 'Title: ' + title,
-    this.author = 'Author: ' + author,
-    this.pages = 'Number of pages: ' + pages,
-    this.read = 'Read status: ' + read
+    this.title = title,
+        this.author = author,
+        this.pages = pages,
+        this.read = read
 }
 
 function addBookToLibrary(newBook) {
@@ -12,16 +12,21 @@ function addBookToLibrary(newBook) {
 }
 
 function displayBook(newBook) {
-    newDiv = document.createElement('div');
+    let newDiv = document.createElement('div');
     newDiv.className = 'book-Card';
     
+    newDiv.addEventListener('click', () => newDiv.classList.toggle('expanded'));
+
     let bookInfo = Object.values(newBook);
     bookInfo.forEach(info => {
         newInfo = document.createElement('div');
         newInfo.textContent = info;
+        newInfo.className = 'text';
         newDiv.appendChild(newInfo);
     })
-    
+
+    newDiv.firstElementChild.className = 'title';
+
     display.appendChild(newDiv);
 }
 

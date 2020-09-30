@@ -2,6 +2,21 @@
     box-sizing: border-box;
 }
 
+body{
+    margin: 0;
+}
+
+#styleButton {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    font-size: 1.5625rem;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background: goldenrod;
+}
+
 .form {
     border: 2px solid black;
     border-radius: 5px;
@@ -13,7 +28,7 @@
     transform : translate(-50%, -50%) scale(0);
     transition: 250ms ease-in-out;
     width: 400px;
-    z-index:1;
+    z-index:5;
     background: white;
 }
 
@@ -30,7 +45,7 @@
     border-bottom: 2px solid black;
 }
 
-.title {
+.header-text {
     font-size: 1.25rem;
 }
 
@@ -77,17 +92,17 @@
 #overlay.active {
     pointer-events: all;
     opacity: 1;
+    z-index: 4;
 }
 
 .display {
-    position: absolute;
+    position: relative;
+    margin-top: 100px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 2px solid black;
+    left: 30%;
     width : 75vw;
     max-width: 1000px;
-    height: 500px;
+    height: auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -96,6 +111,68 @@
 .book-Card {
     display: flex;
     flex-direction: column;
+    align-items: center;
     font-size: 1.25rem;
     font-weight: bold;
+    margin: 20px;
+    background: rgb(211, 146, 146);
+    border: 5px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(56, 55, 55);
+    min-width: 250px;
+    height: 300px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: height 1000ms;
+}
+
+.book-Card::after {
+    position: relative;
+    top: -95px;
+    content: "";
+    background: rgb(216, 216, 76);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin-top: -140px;
+    z-index: 1;
+    transform: translateY(10px);
+    transition: transform 1000ms;
+}
+
+.book-Card.expanded::after {
+    transform: translateY(0);   
+}
+
+.book-Card.expanded {
+    height: 400px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 65px;
+    font-size: 1.875rem;
+    white-space: nowrap;
+    z-index: 2;
+    transform: translateY(10px);
+    transition: transform 1000ms;
+}
+
+.expanded .title{
+    transform: translateY(0);   
+}
+
+.text {
+    margin: 15px 0;
+    font-size: 1.25rem;
+    transform: translateY(-100px);
+    z-index: -1;
+    opacity: 0;
+    transition: transform 1000ms, z-index 500ms ease-in-out, opacity 500ms ease-in-out;
+}
+
+.expanded .text {
+    transform : translateY(100px);
+    z-index: 0;
+    opacity: 1;
 }
