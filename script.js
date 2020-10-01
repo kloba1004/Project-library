@@ -12,22 +12,39 @@ function addBookToLibrary(newBook) {
 }
 
 function displayBook(newBook) {
-    let newDiv = document.createElement('div');
-    newDiv.className = 'book-Card';
+    let card = document.createElement('div');
+    card.className = 'card';
     
-    newDiv.addEventListener('click', () => newDiv.classList.toggle('expanded'));
+    let face1 = document.createElement('div');
+    face1.classList.add('face1');
+    let content1 = document.createElement('div');
+    let image = document.createElement('img');
+    image.src = '../Project-library/book.png';
+    content1.appendChild(image);
+    face1.appendChild(content1);
 
+    let face2 = document.createElement('div');
+    face2.classList.add('face2');
+    let content2 = document.createElement('div');
+    face2.appendChild(content2);
+
+    let i = 0;
     let bookInfo = Object.values(newBook);
     bookInfo.forEach(info => {
-        newInfo = document.createElement('div');
-        newInfo.textContent = info;
-        newInfo.className = 'text';
-        newDiv.appendChild(newInfo);
+        text = document.createElement('p');
+        text.textContent = info;
+        if (i === 0) {
+            text.className = 'title';
+            content1.appendChild(text);
+        } else {
+            text.className = 'text';
+            content2.appendChild(text);
+        }
     })
 
-    newDiv.firstElementChild.className = 'title';
-
-    display.appendChild(newDiv);
+    card.appendChild('face1');
+    card.appendChild('face2');
+    display.appendChild(card);
 }
 
 const openButton = document.querySelector('.openButton');
