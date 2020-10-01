@@ -1,10 +1,9 @@
-let library = [],
-    i = 0;
+let library = [];
 
 function Book(title, author, pages, read) {
     this.title = title,
-        this.author = author,
-        this.pages = pages,
+        this.author = 'By: ' + author,
+        this.pages = pages + ' pages',
         this.read = read
 }
 
@@ -25,19 +24,20 @@ function displayBook(newBook) {
     face2.classList.add('face2');
 
     let content1 = document.createElement('div');
-    content1.className = 'content';
+    content1.className = 'content1';
 
     let img = document.createElement('img');
     img.src = 'book.png';
+    img.className = 'img';
     content1.appendChild(img);
 
     let content2 = document.createElement('div');
-    content1.className = 'content';
+    content1.className = 'content2';
     
+    let i = 0;
     let bookInfo = Object.values(newBook);
     bookInfo.forEach(info => {
         text = document.createElement('div');
-
         if (i === 0) {
             text.className = 'title';
             content1.appendChild(text);
