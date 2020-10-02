@@ -23,15 +23,33 @@
         <section class="section">
             <input class="input" type="text" placeholder="Title" required>
             <input class="input" type="text" placeholder="Author" required>
-            <input class="input" type="text" placeholder="Number of pages" required>
-            <input class="input" type="text" placeholder="Read status" required>
+            <input class="input" id="number" type="number" min="1" max="10000" placeholder="Number of pages" required>
+            <div>
+                <label>
+                    <input class="input radio" type="radio" name="status" value="yes" checked>
+                    I have read it.
+                </label>
+                <label>
+                    <input class="input radio" type="radio" name="status" value="no">
+                    I haven't read it.
+                </label>
+            </div> 
             <button class="submit">SUBMIT</button>
         </section>
     </form>
 
     <div id="overlay"></div>
 
-    <div class="display"></div>
+    <div class="table">
+        <div class="top-row">
+            <p class='longer-text' id='first-column-top-row'>Title</p>
+            <p class='longer-text'>Author</p>
+            <p>Number of pages</p>
+            <p>Read status</p>
+        </div>
+        
+        <div class="display"></div>
+    </div>
 
     <script type= "text/javascript" src="script.js"></script>
 </body>

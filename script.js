@@ -2,8 +2,8 @@ let library = [];
 
 function Book(title, author, pages, read) {
     this.title = title,
-        this.author = 'By: ' + author,
-        this.pages = pages + ' pages',
+        this.author = author,
+        this.pages = pages,
         this.read = read
 }
 
@@ -12,57 +12,53 @@ function addBookToLibrary(newBook) {
 }
 
 function displayBook(newBook) {
-    let card = document.createElement('div');
-    card.className = 'card';
+    let newRow = document.createElement('div');
+    newRow.className = 'new-row';
 
-    let face1 = document.createElement('div');
-    face1.className = 'face';
-    face1.classList.add('face1');
-
-    let face2 = document.createElement('div');
-    face2.className = 'face';
-    face2.classList.add('face2');
-
-    let content1 = document.createElement('div');
-    content1.className = 'content1';
-
-    let img = document.createElement('img');
-    img.src = 'book.png';
-    img.className = 'img';
-    content1.appendChild(img);
-
-    let content2 = document.createElement('div');
-    content1.className = 'content2';
-    
     let i = 0;
     let bookInfo = Object.values(newBook);
     bookInfo.forEach(info => {
-        text = document.createElement('div');
-        if (i === 0) {
-            text.className = 'title';
-            content1.appendChild(text);
-        
+
+        if (i < 3 ) {
+            let p = document.createElement('p');
+            p.textContent = info;
+            if (i < 2) {
+                p.className = 'longer-text';
+            }
+            if (i === 0) {
+                p.setAttribute('id', 'first-column');
+            }
+            newRow.appendChild(p);
         } else {
-            text.className = 'text';
-            content2.appendChild(text);
+            let buttonStatus = document.createElement('button');
+            if (info === 'yes') {
+                buttonStatus.textContent = 'READ';
+            } else {
+                buttonStatus.textContent = 'NOT READ';
+            }
+            buttonStatus.className = 'status';
+            newRow.appendChild(buttonStatus);
+
+            buttonStatus.addEventListener('click', (e) => {
+                if (buttonStatus.textContent === 'READ') {
+                    buttonStatus.textContent = 'NOT READ';
+                } else {
+                    buttonStatus.textContent = 'READ';
+                }
+            })
         }
         
-        text.textContent = info;
         i++;
     })
 
-    face1.appendChild(content1);
-    face2.appendChild(content2);
-    card.appendChild(face1);
-    card.appendChild(face2);
-    display.appendChild(card);
+    display.appendChild(newRow);
 }
-
 const openButton = document.querySelector('.openButton');
 const form = document.querySelector('.form');
 const overlay = document.querySelector('#overlay');
 const closeButton = document.querySelector('.closeButton');
 const input = document.querySelectorAll('.input');
+const radio = document.querySelectorAll('.radio');
 const display = document.querySelector('.display');
 
 openButton.addEventListener('click', () => {
@@ -88,7 +84,9 @@ overlay.addEventListener('click', () => {
 })
 
 form.addEventListener('submit', (e) => {
-    newBook = new Book(input[0].value, input[1].value, input[2].value, input[3].value);
+    let j;
+    radio[0].checked ? j = 3 : j = 4;
+    newBook = new Book(input[0].value, input[1].value, input[2].value, input[j].value);
     addBookToLibrary(newBook);
     closeForm();
     displayBook(newBook);
