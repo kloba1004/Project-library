@@ -137,7 +137,9 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
+    position: relative;
+    left: 25%;
     margin: 0 20px;
 }
 
@@ -174,11 +176,11 @@ p.longer-text {
 
 .new-row {
     display: flex;
-    border-bottom: 3px solid black;
 }
 
 .new-row p {
     border-right: 3px solid black;
+    border-bottom: 3px solid black;
     padding: 5px 0;
     width: 150px;
     text-align: center;
@@ -198,6 +200,7 @@ p.longer-text {
 .status {
     border: none;
     border-right: 3px solid black;
+    border-bottom: 3px solid black;
     padding: 5px 0;
     width: 150px;
     text-align: center;
@@ -211,4 +214,22 @@ p.longer-text {
 
 .status:hover {
     background: rgb(212, 122, 62);
+}
+
+.remove {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 0;
+    width: 100px;
+    text-align: center;
+    background: rgb(199, 108, 24);
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.remove:hover {
+    background: rgb(212, 160, 62);
 }

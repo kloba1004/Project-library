@@ -51,7 +51,15 @@ function displayBook(newBook) {
         i++;
     })
 
+    let removeButton = document.createElement('button');
+    removeButton.className = 'remove';
+    removeButton.textContent = 'REMOVE';
+    newRow.appendChild(removeButton);
+
     display.appendChild(newRow);
+    removeButton.addEventListener('click', () => {
+        display.removeChild(newRow);
+    })
 }
 const openButton = document.querySelector('.openButton');
 const form = document.querySelector('.form');
