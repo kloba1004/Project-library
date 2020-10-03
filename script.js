@@ -140,4 +140,3 @@ if (!localStorage.getItem(`title0`)) {
 } else {
     setDisplay();
 }
-console.table(localStorage);
