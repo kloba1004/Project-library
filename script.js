@@ -42,8 +42,10 @@ function displayBook(newBook) {
             buttonStatus.addEventListener('click', (e) => {
                 if (buttonStatus.textContent === 'READ') {
                     buttonStatus.textContent = 'NOT READ';
+                    localStorage[`read${library.indexOf(newBook)}`] = 'no';
                 } else {
                     buttonStatus.textContent = 'READ';
+                    localStorage[`read${library.indexOf(newBook)}`] = 'yes';
                 }
             })
         }
@@ -57,9 +59,16 @@ function displayBook(newBook) {
     newRow.appendChild(removeButton);
 
     display.appendChild(newRow);
-    removeButton.addEventListener('click', () => {
+    removeButton.addEventListener('click', (e) => {
         display.removeChild(newRow);
-    })
+        localStorage.removeItem(`title${library.indexOf(newBook)}`);
+        localStorage.removeItem(`author${library.indexOf(newBook)}`);
+        localStorage.removeItem(`pages${library.indexOf(newBook)}`);
+        localStorage.removeItem(`read${library.indexOf(newBook)}`);
+        library.splice(library.indexOf(newBook),1);
+        localStorage.clear();
+        populateStorage();
+    });
 }
 const openButton = document.querySelector('.openButton');
 const form = document.querySelector('.form');
@@ -98,6 +107,37 @@ form.addEventListener('submit', (e) => {
     addBookToLibrary(newBook);
     closeForm();
     displayBook(newBook);
+    populateStorage();
     form.reset();
     e.preventDefault();
 })
+
+function populateStorage() {
+   library.forEach(book => {
+       localStorage.setItem(`title${library.indexOf(book)}`, book['title']);
+       localStorage.setItem(`author${library.indexOf(book)}`, book['author']);
+       localStorage.setItem(`pages${library.indexOf(book)}`, book['pages']);
+       localStorage.setItem(`read${library.indexOf(book)}`, book['read']);
+    });
+}
+
+
+function setDisplay() {
+    for (i = 0; i < localStorage.length/4; i++) {
+        let title = localStorage.getItem(`title${i}`);
+        let author = localStorage.getItem(`author${i}`);
+        let pages = localStorage.getItem(`pages${i}`);
+        let read = localStorage.getItem(`read${i}`);
+
+        let newBook = new Book(title, author, pages, read);
+        addBookToLibrary(newBook);
+        displayBook(newBook);
+    }
+}
+
+if (!localStorage.getItem(`title0`)) {
+    populateStorage();
+} else {
+    setDisplay();
+}
+console.table(localStorage);
